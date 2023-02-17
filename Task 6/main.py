@@ -1,10 +1,24 @@
 import math
+import tkinter as tk
 
 
-def main(y):
-    n = len(y) - 1
-    return 22 * sum(44 * math.atan(46 * y[int(n + 1 - i)]) ** 4 for i in range(1, len(y) - 1))
+def pyshader(func, w, h):
+    scr = bytearray((0, 0, 0) * w * h)
+    for y in range(h):
+        for x in range(w):
+            p = (w * y + x) * 3
+            scr[p:p + 3] = [max(min(int(c * 255), 255), 0)
+                            for c in func(x / w, y / h)]
+    return bytes('P6\n%d %d\n255\n' % (w, h), 'ascii') + scr
 
 
-print(main([0.64, -0.74, -0.72, -0.2, -0.77, 0.98, -0.18, 0.48]))
-print(2.92e+04)
+# Ваш код здесь:
+def func(x, y):
+    return x, y, 0
+
+
+label = tk.Label()
+img = tk.PhotoImage(data=pyshader(func, 256, 256)).zoom(2, 2)
+label.pack()
+label.config(image=img)
+tk.mainloop()
