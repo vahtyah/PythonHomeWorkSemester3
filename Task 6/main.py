@@ -1,10 +1,12 @@
 import math
 
 
-def main(y):
-    n = len(y) - 1
-    return 22 * sum(44 * math.atan(46 * y[int(n + 1 - i)]) ** 4 for i in range(1, len(y) - 1))
+def main(y, z, i=1):
+    if i > len(y):
+        return 0
+    return ((z[len(y) - math.ceil(i / 2)]) ** 2 + y[math.ceil(i / 3) - 1] + 58 * (y[math.ceil(i / 2) - 1]) ** 3) ** 4\
+        + main(y, z, i + 1)
 
 
-print(main([0.64, -0.74, -0.72, -0.2, -0.77, 0.98, -0.18, 0.48]))
-print(2.92e+04)
+print(main([-0.71, 0.8, 0.72, 0.46, -0.51, -0.57, -0.9], [-0.32, -0.34, 0.31, -0.06, -0.51, -0.9, 0.13]))
+print(2.71e+06)
